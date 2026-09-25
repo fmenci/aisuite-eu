@@ -1,0 +1,29 @@
+<header class="navbar navbar-dark bg-dark px-3">
+  <span class="navbar-brand">&#64;aisuite-eu/ngtools <small class="text-light">demo</small></span>
+</header>
+
+<div class="nav nav-tabs demo-tabs" role="tablist" aria-label="Components">
+  @for (tab of tabs; track tab.id) {
+    <button type="button" role="tab" class="nav-link" [class.active]="active() === tab.id"
+      [id]="'tab-' + tab.id" [attr.aria-selected]="active() === tab.id" [attr.aria-controls]="'panel-' + tab.id"
+      [tabindex]="active() === tab.id ? 0 : -1" (click)="select(tab.id)" (keydown)="onKey($event)">
+      <i class="fas fa-fw {{ tab.icon }}"></i> {{ tab.title }}
+    </button>
+  }
+</div>
+
+@for (tab of tabs; track tab.id) {
+  <main role="tabpanel" class="demo-main" tabindex="0" [id]="'panel-' + tab.id" [attr.aria-labelledby]="'tab-' + tab.id"
+    [hidden]="active() !== tab.id">
+    @if (opened().includes(tab.id)) {
+      @switch (tab.id) {
+        @case ('inputs') { @defer { <app-inputs-page /> } }
+        @case ('lists') { @defer { <app-lists-page /> } }
+        @case ('lingua') { @defer { <app-lingua-page /> } }
+        @case ('linsce') { @defer { <app-linsce-page /> } }
+        @case ('doko') { @defer { <app-doko-page /> } }
+        @case ('helpers') { @defer { <app-helpers-page /> } }
+      }
+    }
+  </main>
+}

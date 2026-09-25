@@ -1,6 +1,6 @@
 {
   "name": "@aisuite-eu/ngtools",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "license": "GPL-3.0-or-later",
   "author": {"name": "Franck Menci", "email": "franck@menci.net", "url": "https://www.aisuite.eu"},
   "description": "Angular tools of AI Suite: LinSce labels (localisation), document upload, reactive form controls and helpers. See README.md for details",

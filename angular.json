@@ -29,6 +29,15 @@
           "options": {
             "tsConfig": "projects/aisuite-eu-ngtools/tsconfig.spec.json"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/aisuite-eu-ngtools/**/*.ts",
+              "projects/aisuite-eu-ngtools/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -121,6 +130,15 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/demo/**/*.ts",
+              "projects/demo/**/*.html"
+            ]
+          }
         }
       }
     }

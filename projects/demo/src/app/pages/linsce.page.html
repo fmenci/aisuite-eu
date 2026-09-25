@@ -1,5 +1,5 @@
-<div class="page-header">
-  <h1 class="h3">LinSce labels</h1>
+<div class="d-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0">LinSce labels</h1>
   <div class="btn-group" role="group" aria-label="Operation language">
     @for (code of codes; track code) {
       <ais-flag-button [mylin]="code" [isActive]="lingua() === code" (linguaEvent)="switchLingua($event)" />

@@ -6,8 +6,7 @@ import { DemoCard } from '../shared/demo-card';
 @Component({
   selector: 'app-linsce-page',
   imports: [DemoCard, AisuiteNgtoolsComponent, FlagButtonComponent, LinScePipe],
-  templateUrl: './linsce.page.html',
-  styleUrl: './linsce.page.less'
+  templateUrl: './linsce.page.html'
 })
 export class LinscePage {
   private readonly service = inject(LanguageService);
