@@ -3,6 +3,14 @@ https;//www.aisuite.eu host the application AI Suite (aisuite-eu), created by Fr
 In this project, offically made public 25/09/2026, although it existed since 2008 under paid licence, you will find tools and shared components designed as a library to import in angular 22.
 The demo project enables viewing and testing on components as they are intended.
 
+## Demo
+```
+npm install
+npm start
+```
+Opens the demo at http://localhost:4200. It lives in `projects/demo` and shows every component of the library, with a mocked AI Suite server (`projects/demo/src/app/mock`) so that it runs on its own.
+Other scripts: `npm run build` (demo), `npm run build:lib`, `npm run test:lib`.
+
 ## @aisuite-eu/ngtools
 In this library, please find more detailled description in its readme.md file, a set of components is provided .
 

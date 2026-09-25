@@ -1,0 +1,35 @@
+<h1 class="h3 mb-4">Lists and icons</h1>
+<p class="text-body-secondary">
+  The list controls ask <code>LivelyListDirective</code> for their data; the application answers, here from a small in-memory source
+  (see <code>DemoListsService</code>).
+</p>
+
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-lg-6">
+      <app-demo-card title="Selector" selector="ais-control-selector"
+        description="Pick one entry of a predefined list, the preselected entries come first.">
+        <label class="d-block">
+          <span class="visually-hidden">Country</span>
+          <ais-control-selector formControlName="country" listname="Countries" placeholder="Choose a country" />
+        </label>
+      </app-demo-card>
+      <app-demo-card title="Control list with filter" selector="ais-aicontrol-list"
+        description="Type at least 3 characters to filter the list, it is bound to a nested form group (unicId, name).">
+        <label class="d-block">
+          <span class="visually-hidden">Department</span>
+          <ais-aicontrol-list formGroupName="department" listname="Departments" placeholder="Search a department" />
+        </label>
+      </app-demo-card>
+      <app-demo-card title="Icon selector" selector="ais-icon-selector"
+        description="Icon type, value and title, with the preview on the left. Try the Font Awesome value 'star'.">
+        <ais-icon-selector formGroupName="icon" [metamodel]="iconModel" />
+      </app-demo-card>
+    </div>
+    <div class="col-lg-6">
+      <app-demo-card title="Form value">
+        <pre class="demo-value mb-0">{{ value() | json }}</pre>
+      </app-demo-card>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+<h1 class="h3 mb-4">LinSce labels</h1>
+<p class="text-body-secondary">
+  Labels are looked up by formula and tag in the operation language (<code>{{ language.operationLingua }}</code>).
+  A missing tag shows as <code>*tag</code> and is reported to the server.
+</p>
+
+<div class="row">
+  <div class="col-lg-6">
+    <app-demo-card title="Pipe" selector="linsceLocalisation" description="Formula WDR, tag on the left, label on the right.">
+      <ul class="list-group">
+        @for (tag of tags; track tag) {
+          <li class="list-group-item d-flex justify-content-between">
+            <code>{{ tag }}</code>
+            <span>{{ tag | linsceLocalisation : 'WDR' }}</span>
+          </li>
+        }
+      </ul>
+    </app-demo-card>
+  </div>
+  <div class="col-lg-6">
+    <app-demo-card title="Formula display" selector="ais-linsce-display" description="Lists the tags cached for a formula.">
+      <ais-linsce-display myformula="WDR" mylin="en" />
+    </app-demo-card>
+  </div>
+</div>

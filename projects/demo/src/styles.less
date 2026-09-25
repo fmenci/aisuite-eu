@@ -1,0 +1,37 @@
+// Host application styles expected by the @aisuite-eu/ngtools components (Bootstrap 5 + Font Awesome)
+.aisuite-formcontrol {
+  position: relative;
+}
+
+.aisuite-control-list {
+  position: absolute;
+  z-index: 1050;
+  width: 100%;
+  overflow-y: auto;
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  transition: opacity 0.2s;
+}
+
+.flag {
+  height: 1.5rem;
+  border: 1px solid var(--bs-border-color);
+
+  &.disabled {
+    opacity: 0.4;
+  }
+}
+
+.gest-print {
+  display: none;
+
+  @media print {
+    display: inline;
+  }
+}
+
+.demo-value {
+  font-family: var(--bs-font-monospace);
+  font-size: 0.85rem;
+}
