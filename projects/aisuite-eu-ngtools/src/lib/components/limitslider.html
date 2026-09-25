@@ -1,0 +1,26 @@
+<div class="limitslider-container" role="presentation" (keydown)="onKey($event)">
+  <span class="limitslider-label">{{ limits.name }}</span>
+  <input type="range" class="limitslider-range ungest-print"
+    [step]="step" [min]="limits.lowband" [max]="limits.highband" [value]="sliderpos" (input)="sliderpos = +$any($event.target).value"
+    (mouseup)="validateslider(sliderpos)" (focus)="touch()" [disabled]="disabled" [class.form-control-sm]="small" />
+    <input type="text" class="limitslider-numberbox text-end ungest-print" [value]="cur" (input)="cur = $any($event.target).value" (blur)="validatecur(cur)"
+      (focus)="touch()" [disabled]="disabled" [class.form-control-sm]="small" />
+      <span class="gest-print">{{ cur }}</span>
+      @if (isAlarmOn) {
+        <svg class="limitslider-alarm" version="1.1" viewBox="0 0 464 400"
+          xmlns="http://www.w3.org/2000/svg">
+          <title>{{ limits.name }}</title>
+          <path d="m232 9.9999-222 380h444z" fill="#a00" />
+          <path d="m232 75.654-170.38 289.26h340.61z" fill="#fc0" />
+          <g fill="#2b2200">
+            <path
+              d="m230.91 301.22c15.411.19434 30.828 7.148 30.867 25.984.0291 14.072-12.107 25.977-29.823 25.886-15.026-.0774-26.639-10.388-27.97-25.978s10.631-26.098 26.926-25.892z" />
+              <path
+                d="m231.42 290.3c-4.4606-52.136-23.861-74.904-25.419-105.89-1.5573-30.989 11.762-60.781 28.767-60.743 17.005.0383 29.662 21.73 28.105 60.335-1.557 38.606-26.779 53.922-31.453 106.3z" />
+              </g>
+            </svg>
+          }
+          @if (isAlarmOn) {
+            <span class="limitslider-alarm-message">{{ alertmessage }}</span>
+          }
+        </div>

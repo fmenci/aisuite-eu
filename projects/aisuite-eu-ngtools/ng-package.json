@@ -1,0 +1,8 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/aisuite-eu-ngtools",
+  "assets": ["LICENSE.txt", "changelog.md"],
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  }
+}

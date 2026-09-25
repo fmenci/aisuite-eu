@@ -1,0 +1,17 @@
+import { Directive, ViewContainerRef, inject } from '@angular/core';
+
+@Directive({
+    selector: '[aisModalHost]'
+})
+
+/*
+//    ---------------------------------------------------------
+//    ---     AISuite Project WDR aisuite-ngtools           ---
+//    ---------------------------------------------------------
+//
+// this is either re-used here or copied everywhere else it is needed thus enabling a single point for development.
+*/
+
+export class ModalHostDirective {
+  viewContainerRef = inject(ViewContainerRef);
+}

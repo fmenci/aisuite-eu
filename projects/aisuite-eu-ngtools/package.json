@@ -1,0 +1,17 @@
+{
+  "name": "@aisuite-eu/ngtools",
+  "version": "3.0.0",
+  "license": "GPL-3.0-or-later",
+  "author": {"name": "Franck Menci", "email": "franck@menci.net", "url": "https://www.aisuite.eu"},
+  "description": "Angular tools of AI Suite: LinSce labels (localisation), document upload, reactive form controls and helpers. See README.md for details",
+  "homepage": "https://www.aisuite.eu",
+  "bugs": {"email": "franck@menci.net"},
+  "keywords": ["angular", "aisuite", "linsce", "localisation", "i18n", "labels", "forms", "xml"],
+  "publishConfig": {"access": "public"},
+  "peerDependencies": {
+    "@angular/common": ">=21 <23",
+    "@angular/core": ">=21 <23",
+    "@angular/forms": ">=21 <23",
+    "rxjs": "^7.4.0"
+  }
+}

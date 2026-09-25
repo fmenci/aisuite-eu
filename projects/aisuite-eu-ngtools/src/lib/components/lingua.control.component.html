@@ -1,0 +1,23 @@
+<div class="aisuite-formcontrol">
+  <div class="input-group">
+    <input type="hidden" [value]="itemid" />
+    <img [src]="currentflag.imageUrl" [alt]="currentflag.altName" class="flag" [class.disabled]="!currentflag.check" />
+    <button class="btn btn-sm btn-outline-secondary aisuite-leaf" type="button" role="button" (click)="show()" [disabled]="disabledleaf"
+      [ngStyle]="{'display': readonly ? 'none' : 'block' }">
+      <i class="fas fa-box-open"></i>
+    </button>
+  </div>
+  <div class="aisuite-control-list" (mouseleave)="hide()" [style.max-height]="macheigth"
+    tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': visible && !readonly ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0 }">
+    <div class="list-group">
+      @for (lin of linguas; track lin) {
+        <button type="button" role="button" [class]="gpClass()"
+          (click)="pushlingua(lin)" [attr.title]="lin.label">
+          <img [src]="lin.imageUrl" [alt]="lin.altName" class="flag" [class.disabled]="!lin.check" />
+          {{ lin.altName }}
+        </button>
+      }
+    </div>
+  </div>
+</div>

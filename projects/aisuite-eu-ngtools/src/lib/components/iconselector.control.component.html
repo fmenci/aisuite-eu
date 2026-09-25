@@ -1,0 +1,36 @@
+<div [formGroup]="aiForm" class="icon-selector-control">
+  <div class="icon-selector-display">
+    @switch (icontype) {
+      @case (1) {
+        <img [src]="urlfetch" [alt]="icontitle" />
+      }
+      @case (2) {
+        <span class="icon-selector-fontawesome"><i [class]="urlfetch"> </i></span>
+      }
+      @case (3) {
+        <span class="iconografia"><img [src]="urlfetch" [alt]="iconvalue" /></span>
+      }
+      @case (4) {
+        <img [src]="urlfetch" [alt]="icontitle" />
+      }
+      @case (5) {
+        <img [src]="urlfetch" [alt]="icontitle" />
+      }
+      @case (6) {
+        <img [src]="urlfetch" [alt]="icontitle" />
+      }
+      @default {
+        <span>-</span>
+      }
+    }
+  </div>
+  <div class="icon-selector-container">
+    <ais-icontype-input formControlName="iconType"></ais-icontype-input>
+    <input formControlName="iconValue" class="form-control icon-value" placeholder="Value" type="text" [class.form-control-sm]="small" />
+  </div>
+  @if (showtitle) {
+    <div class="icon-selector-container">
+      <input formControlName="iconTitle" class="form-control icon-title" placeholder="Title" type="text" [class.form-control-sm]="small" />
+    </div>
+  }
+</div>

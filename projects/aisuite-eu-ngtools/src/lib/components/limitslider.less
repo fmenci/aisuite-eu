@@ -1,0 +1,46 @@
+.limitslider-container {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px #ced4da solid;
+  position: relative;
+  background: #fffcb8;
+  background: linear-gradient(0deg, #fffcb8 0%, rgba(2, 0, 36, 0) 15%);
+}
+.limitslider-container input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+.limitslider-container input.limitslider-numberbox {
+  width: 90px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 6px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: bold;
+}
+.limitslider-container input.limitslider-range {
+  width: calc(100% - 90px);
+}
+.limitslider-container .limitslider-label {
+  width: calc(100% - 120px);
+  text-align: center;
+  display: inline-block;
+}
+.limitslider-container .limitslider-alarm {
+  position: absolute;
+  width: 25px;
+  top: 0;
+  right: 92px;
+  display: block;
+}
+.limitslider-container .limitslider-alarm-message {
+  width: 100%;
+  display: inline-block;
+  color: #df0c0c;
+}
