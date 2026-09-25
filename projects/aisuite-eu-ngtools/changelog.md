@@ -32,4 +32,4 @@ Version 14, library ready for npm publishing, typescript modules and service use
     - new optional config : routes (server routes, LinSceRoutes, DEFAULT_LINSCE_ROUTES) and docHeaderTemplate (default : AISuite signature)
     - peerDependencies loosened to Angular >=21 <23 (only tested on Angular 22)
     - LICENSE.txt added to the package, package.json metadata completed (homepage, bugs, keywords, public access)
-
+    - LanguageService.switchLingua(lingua, uiLanguageJS) changes the operation language, linsceLocalisation pipe takes the language as optional 3rd argument to be re-evaluated

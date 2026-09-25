@@ -12,13 +12,17 @@ import { LanguageService } from './language.service';
 
 // How to use :
 //    {{ '<tag name>' | linsceLocalisation: formula }}
+// After LanguageService.switchLingua, give the language to re-evaluate the pipe:
+//    {{ '<tag name>' | linsceLocalisation: formula : currentLingua }}
 @Pipe({
     name: 'linsceLocalisation'
 })
 export class LinScePipe implements PipeTransform {
   private repo = inject(LanguageService);
 
-  transform(tag: string, formula: string): string {
+  // lingua is not used, it only makes the pure pipe run again when the language changes
+  transform(tag: string, formula: string, lingua?: string): string {
+    void lingua;
     return this.repo.label(formula, tag);
   }
 }

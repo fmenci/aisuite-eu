@@ -9,27 +9,40 @@ export const DEMO_FLAGS: ILinguaFlag[] = [
   flag('en', 'English', 'Flag_of_the_United_Kingdom'),
   flag('fr', 'Français', 'Flag_of_France'),
   flag('de', 'Deutsch', 'Flag_of_Germany'),
-  flag('it', 'Italiano', 'Flag_of_Italy')
+  flag('it', 'Italiano', 'Flag_of_Italy'),
+  flag('es', 'Español', 'Flag_of_Spain')
 ];
 
-/** Labels of the WDR formula, as the AI Suite server would export them */
-export const DEMO_LABELS: LinSceExportFormula[] = [
-  {
-    formula: 'WDR', lingua: 'en', tags: [
-      { tag: 'GedModalTitle', pcmt: 'Document upload' },
-      { tag: 'GedFileToolLabel', pcmt: 'Select files' },
-      { tag: 'GedDropLabel', pcmt: 'or drop files here' },
-      { tag: 'GedQueueLabel', pcmt: 'Files in the queue' },
-      { tag: 'LastModifiedLabel', pcmt: 'last modified' },
-      { tag: 'GedDropEffect', pcmt: 'copy' },
-      { tag: 'GedNoFileMessage', pcmt: 'No file to process' },
-      { tag: 'GedFileLoadedMessage', pcmt: 'Loaded:' },
-      { tag: 'GedFileFailedMessage', pcmt: 'Failed:' },
-      { tag: 'Greeting', pcmt: 'Hello from the LinSce label database' },
-      { tag: 'Farewell', pcmt: 'See you soon' }
-    ]
+/** Labels of the WDR formula by language, the tags the server does not know are shown as *tag */
+const DEMO_TAGS: Record<string, Record<string, string>> = {
+  en: {
+    GedModalTitle: 'Document upload', GedFileToolLabel: 'Select files', GedDropLabel: 'or drop files here',
+    GedQueueLabel: 'Files in the queue', LastModifiedLabel: 'last modified', GedDropEffect: 'copy',
+    GedNoFileMessage: 'No file to process', GedFileLoadedMessage: 'Loaded:', GedFileFailedMessage: 'Failed:',
+    Greeting: 'Hello from the LinSce label database', Farewell: 'See you soon'
+  },
+  fr: {
+    GedModalTitle: 'Dépôt de documents', GedFileToolLabel: 'Choisir des fichiers', GedDropLabel: 'ou déposez les fichiers ici',
+    GedQueueLabel: 'Fichiers en attente', LastModifiedLabel: 'modifié le', GedDropEffect: 'copy',
+    GedNoFileMessage: 'Aucun fichier à traiter', GedFileLoadedMessage: 'Chargé :', GedFileFailedMessage: 'Échec :',
+    Greeting: 'Bonjour depuis la base de libellés LinSce', Farewell: 'À bientôt'
+  },
+  de: {
+    GedModalTitle: 'Dokumente hochladen', Greeting: 'Hallo aus der LinSce-Beschriftungsdatenbank', Farewell: 'Bis bald'
+  },
+  it: {
+    GedModalTitle: 'Caricamento documenti', Greeting: 'Ciao dal database di etichette LinSce', Farewell: 'A presto'
+  },
+  es: {
+    GedModalTitle: 'Carga de documentos', Greeting: 'Hola desde la base de etiquetas LinSce', Farewell: 'Hasta pronto'
   }
-];
+};
+
+/** Export of the server (uiLanguageJS) for one language */
+export const demoLabels = (lingua: string): LinSceExportFormula[] => [{
+  formula: 'WDR', lingua,
+  tags: Object.entries(DEMO_TAGS[lingua] ?? {}).map(([tag, pcmt]) => ({ tag, pcmt }))
+}];
 
 const item = (id: string, name: string, isPresel = false): AISuiteCoreListItemModel =>
   new AISuiteCoreListItemModel(id, name, name, '', isPresel, name);

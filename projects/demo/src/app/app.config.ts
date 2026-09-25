@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { filter, firstValueFrom, interval } from 'rxjs';
 import { DokoAPIDirective, LanguageService, provideAisuiteNgtools } from '@aisuite-eu/ngtools';
 import { routes } from './app.routes';
-import { DEMO_LABELS } from './mock/demo-data';
+import { demoLabels } from './mock/demo-data';
 import { DemoListsService } from './mock/demo-lists.service';
 import { mockBackendInterceptor } from './mock/mock-backend.interceptor';
 
@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([mockBackendInterceptor])),
-    provideAisuiteNgtools({ opLingua: 'en', linsceApiUrl: '', uiLanguageJS: DEMO_LABELS }),
+    provideAisuiteNgtools({ opLingua: 'en', linsceApiUrl: '', uiLanguageJS: demoLabels('en') }),
     DokoAPIDirective,
     provideAppInitializer(() => {
       inject(DemoListsService);

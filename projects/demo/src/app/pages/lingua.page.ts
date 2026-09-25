@@ -11,5 +11,5 @@ import { DemoCard } from '../shared/demo-card';
 export class LinguaPage {
   protected readonly lingua = new FormControl('en', { nonNullable: true });
   protected readonly active = signal('en');
-  protected readonly codes = ['en', 'fr', 'de', 'it'];
+  protected readonly codes = ['en', 'fr', 'de', 'it', 'es'];
 }

@@ -1,7 +1,15 @@
-<h1 class="h3 mb-4">LinSce labels</h1>
+<div class="page-header">
+  <h1 class="h3">LinSce labels</h1>
+  <div class="btn-group" role="group" aria-label="Operation language">
+    @for (code of codes; track code) {
+      <ais-flag-button [mylin]="code" [isActive]="lingua() === code" (linguaEvent)="switchLingua($event)" />
+    }
+  </div>
+</div>
 <p class="text-body-secondary">
-  Labels are looked up by formula and tag in the operation language (<code>{{ language.operationLingua }}</code>).
-  A missing tag shows as <code>*tag</code> and is reported to the server.
+  Labels are looked up by formula and tag in the operation language (<code>{{ lingua() }}</code>). Pick a flag to switch it:
+  the application receives the labels of that language from the server. A missing tag shows as <code>*tag</code>
+  and is reported to the server.
 </p>
 
 <div class="row">
@@ -11,7 +19,7 @@
         @for (tag of tags; track tag) {
           <li class="list-group-item d-flex justify-content-between">
             <code>{{ tag }}</code>
-            <span>{{ tag | linsceLocalisation : 'WDR' }}</span>
+            <span>{{ tag | linsceLocalisation : 'WDR' : lingua() }}</span>
           </li>
         }
       </ul>
@@ -19,7 +27,9 @@
   </div>
   <div class="col-lg-6">
     <app-demo-card title="Formula display" selector="ais-linsce-display" description="Lists the tags cached for a formula.">
-      <ais-linsce-display myformula="WDR" mylin="en" />
+      @for (lin of [lingua()]; track lin) {
+        <ais-linsce-display myformula="WDR" [mylin]="lin" />
+      }
     </app-demo-card>
   </div>
 </div>

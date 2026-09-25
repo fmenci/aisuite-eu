@@ -86,6 +86,19 @@ export class LanguageService {
     return '*' + tag;
   }
 
+  /**
+   * Changes the operation language: the labels of the previous language are dropped, the ones given
+   * (the export of the server for the new language) are used from now on.
+   * The linsceLocalisation pipe takes the language as optional 3rd argument, to be re-evaluated on change.
+   */
+  public switchLingua(lingua: string, uiLanguageJS: string | LinSceExportFormula[]): void {
+    this.config = { ...this.config, opLingua: lingua.length >= 2 ? lingua : DEFLIN, uiLanguageJS };
+    this.linformula = [];
+    this.tagStatus = [];
+    this.initFormula();
+    this.initDocHeaderTemplate();
+  }
+
   public getFlag(lin: string): ILinguaFlag {
     return this.linguas.find(l => l.name === lin) ?? DEFAULT_FLAG;
   }
