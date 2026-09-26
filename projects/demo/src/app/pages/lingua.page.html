@@ -1,0 +1,28 @@
+<h1 class="h3 mb-4">Languages</h1>
+<p class="text-body-secondary">
+  The flags come from <code>LanguageService</code>, loaded from the server (here the demo backend).
+</p>
+
+<div class="row">
+  <div class="col-lg-6">
+    <app-demo-card title="Language selector" selector="ais-lingua-selector"
+      description="Flag picker bound to a form control, it holds the language code.">
+      <label class="d-block">
+        <span class="visually-hidden">Language</span>
+        <ais-lingua-selector [formControl]="lingua" [trim0]="true" />
+      </label>
+      <p class="mt-3 mb-0">Selected: <code>{{ lingua.value }}</code></p>
+    </app-demo-card>
+  </div>
+  <div class="col-lg-6">
+    <app-demo-card title="Flag buttons" selector="ais-flag-button"
+      description="One button per language, emits the code on click.">
+      <div class="btn-group">
+        @for (code of codes; track code) {
+          <ais-flag-button [mylin]="code" [isActive]="active() === code" (linguaEvent)="active.set($event)" />
+        }
+      </div>
+      <p class="mt-3 mb-0">Active: <code>{{ active() }}</code></p>
+    </app-demo-card>
+  </div>
+</div>

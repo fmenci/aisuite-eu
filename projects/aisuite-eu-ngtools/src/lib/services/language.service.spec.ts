@@ -38,6 +38,17 @@ describe('LanguageService', () => {
     log.mockRestore();
   });
 
+  it('switches the operation language, dropping the labels of the previous one', () => {
+    const formulas = (lingua: string, pcmt: string) => [{ formula: 'WDR', lingua, tags: [{ tag: 'Hi', pcmt }] }];
+    service.switchLingua('fr', formulas('fr', 'Bonjour'));
+    expect(service.operationLingua).toBe('fr');
+    expect(service.label('WDR', 'Hi')).toBe('Bonjour');
+    service.switchLingua('en', formulas('en', 'Hello'));
+    expect(service.label('WDR', 'Hi')).toBe('Hello');
+    service.switchLingua('x', []);
+    expect(service.operationLingua).toBe(DEFLIN);
+  });
+
   describe('configuration', () => {
     const create = (config: object): LanguageService => {
       TestBed.resetTestingModule();

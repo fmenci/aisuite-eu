@@ -55,6 +55,17 @@ import { CurrencyInputComponent } from '@aisuite-eu/ngtools';
 ```
 `LinScePipe` (pipe `linsceLocalisation`) returns the label of a tag for a formula, in the operation language, through `LanguageService`.
 
+To let the user change the language, give `LanguageService` the labels of the new language (the `uiLanguageJS` export of the server) and pass the
+language to the pipe as 3rd argument, so that it is evaluated again:
+```ts
+this.languages.switchLingua('fr', labelsOfFrench);   // labelsOfFrench: string | LinSceExportFormula[]
+this.lingua.set('fr');
+```
+```html
+{{ 'GedModalTitle' | linsceLocalisation : 'WDR' : lingua() }}
+```
+`ais-flag-button` is meant to trigger it, see the demo (tab LinSce labels).
+
 ## Contents
 - **Components** (selectors prefixed `ais-`): `ais-flag-button`, `ais-lingua-selector`, `ais-aisuite-dokoged`, `ais-linsce-display`
 - **Form controls** (`ControlValueAccessor`): `ais-currency-input`, `ais-datectr-input`, `ais-numeral-input`, `ais-icontype-input`,
@@ -68,7 +79,7 @@ See [changelog.md](changelog.md) for the versions and the breaking changes.
 
 ## Licence
 This software is provided under GNU GPL v3 licence.
-Copyright (c) 2025 Franck Menci
+Copyright (c) 2008/2021 Franck Menci
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published 
 by the Free Software Foundation, version 3.
