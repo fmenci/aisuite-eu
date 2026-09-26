@@ -1,0 +1,28 @@
+<div class="aisuite-formcontrol">
+  <div class="input-group">
+    <input type="hidden" [value]="itemid" />
+    <input type="text" [value]="itemname" class="form-control" [class.form-control-sm]="small" [placeholder]="placeholder" autocomplete="off" readonly />
+    <button class="btn btn-sm btn-outline-secondary aisuite-leaf" type="button" role="button" (click)="show()" [disabled]="disabledleaf">
+      <i class="fas fa-box-open"></i>
+    </button>
+  </div>
+  <div class="aisuite-control-list" (mouseleave)="hide()" [style.max-height]="macheigth"
+    tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0 }">
+    @if (showpresel) {
+      <div class="list-group">
+        @for (itm of presetList; track itm) {
+          <button [class]="gpClass(itm)" type="button" role="button" (click)="userpush(itm)" [innerHTML]="itm.html"></button>
+        }
+      </div>
+    }
+    @if (showpresel) {
+      <div class="dropdown-divider"></div>
+    }
+    <div class="list-group">
+      @for (itm of bulist; track itm) {
+        <button [class]="gpClass(itm)" type="button" role="button" (click)="userpush(itm)" [innerHTML]="itm.html"></button>
+      }
+    </div>
+  </div>
+</div>

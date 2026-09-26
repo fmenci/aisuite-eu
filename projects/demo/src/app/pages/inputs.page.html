@@ -1,0 +1,47 @@
+<h1 class="h3 mb-4">Value inputs</h1>
+<p class="text-body-secondary">All controls implement <code>ControlValueAccessor</code> and are bound with <code>formControlName</code>.</p>
+
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-lg-6">
+      <app-demo-card title="Numeral" selector="ais-numeral-input"
+        description="Decimal number with the locale decimal point. ArrowLeft / ArrowRight step by one.">
+        <label class="d-block">
+          <span class="visually-hidden">Amount</span>
+          <ais-numeral-input formControlName="amount" [doppo]="2" placeholder="Amount" />
+        </label>
+      </app-demo-card>
+      <app-demo-card title="Currency" selector="ais-currency-input" description="Select bound to the Currency enum.">
+        <label class="d-block">
+          <span class="visually-hidden">Currency</span>
+          <ais-currency-input formControlName="currency" />
+        </label>
+      </app-demo-card>
+      <app-demo-card title="Date" selector="ais-datectr-input" description="Native date input, ArrowLeft / ArrowRight move by one day.">
+        <label class="d-block">
+          <span class="visually-hidden">Date</span>
+          <ais-datectr-input formControlName="day" />
+        </label>
+      </app-demo-card>
+      <app-demo-card title="Icon type" selector="ais-icontype-input" description="Select bound to the IconTypeEnum.">
+        <label class="d-block">
+          <span class="visually-hidden">Icon type</span>
+          <ais-icontype-input formControlName="iconType" />
+        </label>
+      </app-demo-card>
+    </div>
+    <div class="col-lg-6">
+      <app-demo-card title="Limit slider" selector="ais-limitslider"
+        description="Slider plus number box, with alarm outside the band. Space resets to nominal, arrows move.">
+        <label class="d-block">
+          <span class="visually-hidden">Temperature</span>
+          <ais-limitslider formControlName="temperature" [limits]="temperatureLimits" />
+        </label>
+      </app-demo-card>
+      <app-demo-card title="Form value">
+        <pre class="demo-value mb-3">{{ value() | json }}</pre>
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="toggleDisabled()">Enable / disable the form</button>
+      </app-demo-card>
+    </div>
+  </div>
+</form>

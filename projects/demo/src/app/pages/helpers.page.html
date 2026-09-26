@@ -1,0 +1,29 @@
+<h1 class="h3 mb-4">Validators and helpers</h1>
+
+<app-demo-card title="Validators" selector="formreactive.helpers"
+  description="Type a value to see which validators reject it.">
+  <input class="form-control mb-2" type="text" [value]="text()" (input)="onInput($event)" placeholder="Value to validate" aria-label="Value to validate" />
+  <div class="mb-3">
+    Try:
+    @for (sample of samples; track sample) {
+      <button type="button" class="btn btn-link btn-sm" (click)="text.set(sample)">{{ sample }}</button>
+    }
+  </div>
+  <table class="table table-sm mb-0">
+    <thead><tr><th>Validator</th><th>Result</th></tr></thead>
+    <tbody>
+      @for (result of results(); track result.name) {
+        <tr>
+          <td><code>{{ result.name }}</code></td>
+          <td>
+            @if (result.errors.length === 0) {
+              <span class="badge text-bg-success">valid</span>
+            } @else {
+              <span class="badge text-bg-danger">{{ result.errors.join(', ') }}</span>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</app-demo-card>

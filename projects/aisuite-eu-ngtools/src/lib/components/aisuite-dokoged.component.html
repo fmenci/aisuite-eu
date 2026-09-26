@@ -1,0 +1,45 @@
+<div class="modal" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+  [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0 }">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ 'GedModalTitle' | linsceLocalisation : 'WDR' }}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="hide()">
+          <span aria-hidden="true">&nbsp;</span>
+        </button>
+      </div>
+      <div class="modal-body" [style.max-height]="computedheight">
+        <div class="drop-zone">
+          <div class="drop-zone-active"
+            (drop)="fileDropHandler($event)"
+            (dragover)="handleDragOver($event)">
+            <form method="post" action="" enctype="multipart/form-data">
+              <label for="fname" class="form-label">{{ 'GedFileToolLabel' | linsceLocalisation : 'WDR' }}</label>
+              <input type="file" name="fname" multiple class="btn btn-secondary" (change)="fileSelectHandler($event)" />
+            </form>
+            <span>{{ 'GedDropLabel' | linsceLocalisation : 'WDR' }}</span>
+          </div>
+          @if (readActive) {
+            <div>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{'width': percentloaded + '%'}" [attr.aria-valuenow]="percentloaded" aria-valuemin="0" aria-valuemax="100"></div>
+                <span class="progress-display">{{ percentloaded + '%' }}</span>
+              </div>
+              <p>{{ 'GedQueueLabel' | linsceLocalisation : 'WDR' }} :</p>
+              <ul>
+                @for (file of arrFiles; track file) {
+                  <li>
+                    <strong>{{ file.name }}</strong> ({{ file.type || 'n/a' }}) - {{ file.size }} bytes, {{ 'LastModifiedLabel' | linsceLocalisation : 'WDR' }} : {{ file.lastModified }}
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+          <output class="drop-zone-status">{{ message }}</output>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<h1 class="h3 mb-4">Document upload</h1>
+<p class="text-body-secondary">
+  Files are cut in slices, sent one by one then combined. The demo backend accepts the slices and forgets them.
+</p>
+
+<app-demo-card title="Doko GED zone" selector="ais-aisuite-dokoged"
+  description="Opens a modal to select or drop files. The server answer for each stored file is listed below.">
+  <button type="button" class="btn btn-primary" (click)="open()"><i class="fas fa-file-arrow-up"></i> Upload files</button>
+  <ul class="mt-3 mb-0">
+    @for (body of received(); track $index) {
+      <li><code>{{ body }}</code></li>
+    }
+  </ul>
+</app-demo-card>
+
+<ais-aisuite-dokoged />
