@@ -26,6 +26,7 @@
     "url": "git+https://github.com/fmenci/aisuite-eu.git",
     "directory": "projects/aisuite-eu-ngtools"
   },
+  "private": true,
   "publishConfig": {
     "access": "public"
   },
