@@ -1,7 +1,7 @@
 {
   "name": "@aisuite-eu/ngtools",
   "version": "3.0.1",
-  "license": "GPL-3.0-or-later",
+  "license": "GPL-3.0-only",
   "author": {
     "name": "Franck Menci",
     "email": "franck@menci.net",
@@ -26,7 +26,6 @@
     "url": "git+https://github.com/fmenci/aisuite-eu.git",
     "directory": "projects/aisuite-eu-ngtools"
   },
-  "private": true,
   "publishConfig": {
     "access": "public"
   },
