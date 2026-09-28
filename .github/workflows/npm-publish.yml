@@ -1,0 +1,50 @@
+name: npm-publish
+
+on:
+  push:
+    branches: [master]
+
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write # npm provenance
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - run: npm ci --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+      # vitest runs in jsdom: no browser needed
+      - name: Test @aisuite-eu/ngtools
+        run: npm run test:lib -- --no-watch
+
+      - name: Build @aisuite-eu/ngtools
+        run: npm run build:lib
+
+      - name: Publish @aisuite-eu/ngtools if its version is new
+        working-directory: dist/aisuite-eu-ngtools
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./package.json').version")
+          if npm view "$name@$version" version > /dev/null 2>&1; then
+            echo "$name@$version is already on npm, nothing to publish"
+          else
+            npm publish --access public --provenance
+          fi
