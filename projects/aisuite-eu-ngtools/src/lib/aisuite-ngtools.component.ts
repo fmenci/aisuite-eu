@@ -10,14 +10,12 @@ import { LanguageFormula } from './models/languageformula.model';
       <div class="formula" [attr.data-id]="linscedsp?.formula">
         <p class="formula" [attr.data-id]="linscedsp?.formula">{{linscedsp?.formula}} (<span [attr.data-id]="linscedsp?.formula" [attr.data-lingua]="linscedsp?.lingua">{{linscedsp?.lingua}}</span>)</p>
         @if (linscedsp?.tags) {
-          <div class="tags">
+          <div>
             @for (tag of linscedsp.tags; track tag) {
-              <div class="tags">
+              <div>
                 <pre class="tags" [attr.data-id]="linscedsp.formula"
                   [attr.data-lingua]="linscedsp.lingua"
-                  [attr.data-tag]="tag.tag">
-                  {{tag.pcmt}}
-                </pre>
+                  [attr.data-tag]="tag.tag">{{tag.pcmt}}</pre>
               </div>
             }
           </div>
@@ -25,22 +23,7 @@ import { LanguageFormula } from './models/languageformula.model';
       </div>
     </div>
     `,
-    styles: [`
-    div.tags {
-      margin: 0;
-      padding: 0;
-    }
-    pre.tags{
-      display: block;
-      font-size: 1.1em;
-      margin: 2px;
-      padding: 4px 8px;
-      background: #def;
-      border: #bbb 1px solid;
-      list-style: none;
-      }
-    `
-    ],
+    styleUrls: ['./aisuite-ngtools.component.less'],
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class AisuiteNgtoolsComponent implements OnInit {

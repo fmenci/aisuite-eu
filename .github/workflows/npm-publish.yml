@@ -1,28 +1,44 @@
+# The file name is part of the trusted publisher configured on npmjs.com: do not rename it without updating npm.
 name: npm-publish
 
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
 
+# pull requests cancel their previous run, a push to master is never cancelled
 concurrency:
-  group: npm-publish
-  cancel-in-progress: false
+  group: npm-publish-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
-  id-token: write # npm provenance
 
 jobs:
-  publish:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      # no dependency cache: what is built here is what gets published
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
-          registry-url: https://registry.npmjs.org
-          cache: npm
+          package-manager-cache: false
+
+      - name: Check versions and changelog
+        run: |
+          lib=$(node -p "require('./projects/aisuite-eu-ngtools/package.json').version")
+          root=$(node -p "require('./package.json').version")
+          if [ "$lib" != "$root" ]; then
+            echo "::error::version $lib (projects/aisuite-eu-ngtools/package.json) differs from $root (package.json)"
+            exit 1
+          fi
+          if ! grep -Eq "^## ${lib//./\\.}( |$)" projects/aisuite-eu-ngtools/changelog.md; then
+            echo "::error::projects/aisuite-eu-ngtools/changelog.md has no '## $lib' heading"
+            exit 1
+          fi
 
       - run: npm ci --no-audit --no-fund
 
@@ -36,15 +52,110 @@ jobs:
       - name: Build @aisuite-eu/ngtools
         run: npm run build:lib
 
-      - name: Publish @aisuite-eu/ngtools if its version is new
+      - name: Content of the package
+        working-directory: dist/aisuite-eu-ngtools
+        run: npm pack --dry-run
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: dist/aisuite-eu-ngtools
+          retention-days: 7
+
+  # Informational: the peer range says Angular >=21 <23 but the library is built and tested on 22.
+  # Swaps the Angular packages for 21 (and the TypeScript and vitest they ask for), then tests and builds.
+  angular-21:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - run: npm ci --no-audit --no-fund
+
+      - name: Angular 21
+        run: >
+          npm install --no-save --no-audit --no-fund
+          @angular/common@^21 @angular/compiler@^21 @angular/core@^21 @angular/forms@^21
+          @angular/platform-browser@^21 @angular/router@^21
+          @angular/build@^21 @angular/cli@^21 @angular/compiler-cli@^21 ng-packagr@^21
+          typescript@~5.9 vitest@^4
+
+      - name: Test @aisuite-eu/ngtools
+        run: npm run test:lib -- --no-watch
+
+      - name: Build @aisuite-eu/ngtools
+        run: npm run build:lib
+
+  # Stages the package, a maintainer approves it (2FA), then publishes the draft GitHub Release.
+  # Authenticates with npm Trusted Publishing (OIDC), there is no npm token in the repository.
+  publish:
+    if: github.event_name == 'push'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # draft GitHub Release
+      id-token: write # npm trusted publishing and provenance
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      # npm stage publish needs npm >= 11.15, the one bundled with Node may be older
+      - name: Update npm
+        run: npm install -g npm@^11.15
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: package
+          path: dist/aisuite-eu-ngtools
+
+      - name: Stage @aisuite-eu/ngtools if its version is new
         working-directory: dist/aisuite-eu-ngtools
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
           name=$(node -p "require('./package.json').name")
           version=$(node -p "require('./package.json').version")
-          if npm view "$name@$version" version > /dev/null 2>&1; then
-            echo "$name@$version is already on npm, nothing to publish"
-          else
-            npm publish --access public --provenance
+          tag="v$version"
+
+          # a new package cannot be staged, its first version is published by hand
+          if ! out=$(npm view "$name" name 2>&1); then
+            if echo "$out" | grep -q E404; then
+              echo "::error::$name is not on npm yet: publish its first version by hand (npm publish --access public), then configure its trusted publisher"
+            else
+              echo "$out"
+            fi
+            exit 1
           fi
+
+          if npm view "$name@$version" version > /dev/null 2>&1; then
+            echo "$name@$version is already on npm, nothing to stage"
+            exit 0
+          fi
+          # a staged version is not visible to npm view: the draft release stands for it
+          if gh release view "$tag" > /dev/null 2>&1; then
+            echo "release $tag exists, $name@$version is already staged (delete the release to stage it again)"
+            exit 0
+          fi
+
+          npm stage publish --access public --provenance
+
+          # release notes: the section of this version in the changelog
+          awk -v v="$version" '/^## /{p=($2==v); next} p' changelog.md > "$RUNNER_TEMP/notes.md"
+          # a draft creates no tag until it is published, so a rejected stage leaves no tag behind
+          gh release create "$tag" --draft --target "$GITHUB_SHA" --title "$name $version" --notes-file "$RUNNER_TEMP/notes.md"
+
+          {
+            echo "### $name@$version is staged, not published"
+            echo "1. approve it on npmjs.com (Staged Packages), or \`npm stage list $name\` then \`npm stage approve <stage-id>\`"
+            echo "2. publish the draft release [$tag]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases) to create the tag"
+            echo "If you reject it, delete the draft release."
+          } >> "$GITHUB_STEP_SUMMARY"
