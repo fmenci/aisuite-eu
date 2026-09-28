@@ -26,8 +26,12 @@
     "url": "https://github.com/fmenci/aisuite-eu.git",
     "directory": "projects/aisuite-eu-ngtools"
   },
+  "private": true,
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "prepublishOnly": "node -e \"const p=require('path');if(p.basename(p.dirname(process.cwd()))!=='dist'){console.error('Publish the built package from dist/aisuite-eu-ngtools (npm run build:lib), not from the sources.');process.exit(1)}\""
   },
   "peerDependencies": {
     "@angular/common": ">=21 <23",
