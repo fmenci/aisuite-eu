@@ -2,12 +2,33 @@
   "name": "@aisuite-eu/ngtools",
   "version": "3.0.1",
   "license": "GPL-3.0-or-later",
-  "author": {"name": "Franck Menci", "email": "franck@menci.net", "url": "https://www.aisuite.eu"},
-  "description": "Angular tools of AI Suite: LinSce labels (localisation), document upload, reactive form controls and helpers. See README.md for details",
+  "author": {
+    "name": "Franck Menci",
+    "email": "franck@menci.net",
+    "url": "https://www.aisuite.eu"
+  },
+  "description": "AI Suite Angular tools : LinSce labels (localisation), document upload, reactive form controls and helpers. See README.md for details",
   "homepage": "https://www.aisuite.eu",
-  "bugs": {"email": "franck@menci.net"},
-  "keywords": ["angular", "aisuite", "linsce", "localisation", "i18n", "labels", "forms", "xml"],
-  "publishConfig": {"access": "public"},
+  "bugs": {
+    "url": "https://github.com/fmenci/aisuite-eu/issues"
+  },
+  "keywords": [
+    "angular",
+    "aisuite",
+    "AI Suite",
+    "linsce",
+    "localisation",
+    "forms",
+    "formReactive"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fmenci/aisuite-eu.git",
+    "directory": "projects/aisuite-eu-ngtools"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "@angular/common": ">=21 <23",
     "@angular/core": ">=21 <23",
