@@ -78,8 +78,8 @@ this.lingua.set('fr');
 See [changelog.md](changelog.md) for the versions and the breaking changes.
 
 ## Licence
-This software is provided under GNU GPL v3 licence.
-Copyright (c) 2008/2021 Franck Menci
+This software is provided under GNU GPL v3 licence (SPDX: GPL-3.0-only), see [LICENSE.txt](LICENSE.txt).
+Copyright (c) 2021-2026 Franck Menci
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published 
 by the Free Software Foundation, version 3.

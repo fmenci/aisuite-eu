@@ -2,7 +2,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { Component, ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { EMPTYGUID } from '../../public-api';
+import { EMPTYGUID } from '../constants';
 import { AISuiteCoreListItemModel } from '../models/aisuitecore.listitem.model';
 import { AisuiteSelectModel } from '../models/aisuiteselect.model';
 import { LivelyListDirective } from '../services/livelylist.directive';

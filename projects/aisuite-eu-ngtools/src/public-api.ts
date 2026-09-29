@@ -1,21 +1,4 @@
-/*
- * Public API Surface of aisuite-ngtools
- */
-
-/*
-//    ---------------------------------------------------------
-//    ---     AISuite typescript tools         ---
-//    ---     use constants   ---
-//    ---------------------------------------------------------
-//
-*/
-
-export const EMPTYGUID = '00000000-0000-0000-0000-000000000000';
-export const REXGUID = /^[A-F0-9]{8}(?:-[A-F0-9]{4}){3}[A-F0-9]{8}$/i;
-export const DECIMALMIN = 0.01;
-export const EMPTYID = 'AAAAAAAAAAAAAAAAAAAAAA';
-export const REXCOMPRESSID = /^[A-Z0-9_-]{22}$/i;
-
+export * from './lib/constants';
 export * from './lib/components/flagbutton.component';
 export * from './lib/models/iajax.response';
 export * from './lib/models/iajaxsingle.response';
@@ -29,9 +12,6 @@ export * from './lib/services/timedelay.directive';
 export * from './lib/api-config';
 export * from './lib/aisuite-ngtools.component';
 export * from './lib/provide-aisuite-ngtools';
-/*
- * Public API Surface of aisuite-dokoged
- */
 
 export * from './lib/components/aisuite-dokoged.service';
 export * from './lib/components/aisuite-dokoged.component';
@@ -42,9 +22,6 @@ export * from './lib/services/doko.api.directive';
 export * from './lib/services/exportxml.directive';
 export * from './lib/services/modalhost.directive';
 
-/*
-*   Public API Surface of formreactive
-*/
 export * from './lib/components/aicontrol.list.component';
 export * from './lib/components/currency.ctr.component';
 export * from './lib/components/date.ctr.component';

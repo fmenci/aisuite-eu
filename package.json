@@ -1,6 +1,25 @@
 {
-  "name": "aisuite-eu",
+  "name": "@aisuite-eu/demo-ngtools",
+  "license": "GPL-3.0-only",
+  "author": {
+    "name": "Franck Menci",
+    "email": "franck@menci.net",
+    "url": "https://www.aisuite.eu"
+  },
+  "private": true,
+  "description": "AI Suite Demo (ngtools) : This package is a standalone demo from 'ngtools', LinSce labels (localisation), document upload, reactive form controls and helpers. See README.md for details",
   "version": "3.0.1",
+  "keywords": [
+    "formReactive",
+    "components",
+    "aisuite",
+    "AI Suite"
+  ],
+  "homepage": "https://github.com/fmenci/aisuite-eu/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmenci/aisuite-eu.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo",
@@ -9,7 +28,6 @@
     "test:lib": "ng test @aisuite-eu/ngtools",
     "lint": "ng lint"
   },
-  "private": true,
   "packageManager": "npm@11.18.0",
   "dependencies": {
     "@angular/common": "^22.0.0",
