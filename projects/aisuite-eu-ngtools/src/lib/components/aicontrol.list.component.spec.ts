@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { EMPTYGUID } from '../../public-api';
+import { EMPTYGUID } from '../constants';
 import { AISuiteCoreListItemModel } from '../models/aisuitecore.listitem.model';
 import { AisuiteSelectModel } from '../models/aisuiteselect.model';
 import { LivelyListDirective } from '../services/livelylist.directive';

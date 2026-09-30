@@ -9,7 +9,7 @@
 
 import { ValidatorFn, AbstractControl, ValidationErrors, FormGroup, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { EMPTYGUID, REXGUID, EMPTYID, REXCOMPRESSID } from '../../public-api';
+import { EMPTYGUID, REXGUID, EMPTYID, REXCOMPRESSID } from '../constants';
 
 export const compressIdValidator: ValidatorFn = (control: AbstractControl): Record<string, ValidationErrors> | null => {
   if (control.value === undefined) {

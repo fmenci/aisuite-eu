@@ -11,6 +11,25 @@ import { LanguageService } from '../services/language.service';
 import { AisuiteDokogedComponent } from './aisuite-dokoged.component';
 import { AisuiteDokogedService } from './aisuite-dokoged.service';
 
+// jsdom (the browser-less test environment) implements neither DataTransfer nor DragEvent: stand in for what the
+// component reads. In a real browser the native classes are used.
+if (typeof DataTransfer === 'undefined') {
+  class FakeDataTransfer {
+    dropEffect = 'none';
+    readonly files: File[] = [];
+    readonly items = { add: (file: File) => this.files.push(file) };
+  }
+  class FakeDragEvent extends Event {
+    readonly dataTransfer: FakeDataTransfer | null;
+    constructor(type: string, init: EventInit & { dataTransfer?: FakeDataTransfer } = {}) {
+      super(type, init);
+      this.dataTransfer = init.dataTransfer ?? null;
+    }
+  }
+  vi.stubGlobal('DataTransfer', FakeDataTransfer);
+  vi.stubGlobal('DragEvent', FakeDragEvent);
+}
+
 describe('AisuiteDokogedComponent', () => {
   let component: AisuiteDokogedComponent;
   let fixture: ComponentFixture<AisuiteDokogedComponent>;
@@ -66,7 +85,8 @@ describe('AisuiteDokogedComponent contract', () => {
   const pick = (...files: File[]) => {
     const transfer = new DataTransfer();
     files.forEach(file => transfer.items.add(file));
-    fileInput().files = transfer.files;
+    // jsdom only accepts a real FileList here
+    Object.defineProperty(fileInput(), 'files', { value: transfer.files, configurable: true });
     fileInput().dispatchEvent(new Event('change'));
     fixture.detectChanges();
   };

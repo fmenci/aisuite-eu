@@ -9,9 +9,6 @@ if exist dist (
 if exist node_modules (  
 	echo "rm node_modules"
 	rmdir /s /q node_modules )
-if exist package-lock.json (  
-	echo "del package-lock"
-	del package-lock.json )
 if exist .angular\cache (  
 	echo "rm angular cache"
 	rmdir /s /q .angular\cache )
