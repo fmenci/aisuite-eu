@@ -8,7 +8,7 @@
   },
   "private": true,
   "description": "AI Suite Demo (ngtools) : This package is a standalone demo from 'ngtools', LinSce labels (localisation), document upload, reactive form controls and helpers. See README.md for details",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "keywords": [
     "formReactive",
     "components",

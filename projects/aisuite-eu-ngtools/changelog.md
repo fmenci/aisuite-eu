@@ -5,7 +5,7 @@ Typescript modules and services of AI Suite used by the rest of the application:
 
 Newest version first. Each release has a `## <version>` heading, the release workflow reads it (release notes, version check).
 
-## 3.0.1 - unreleased
+## 3.0.1 - 29/09/2026
 First version published on npm, it includes the changes of 3.0.0 below.
 - `LanguageService.switchLingua(lingua, uiLanguageJS)` changes the operation language at run time (labels of the previous language are dropped)
 - `linsceLocalisation` pipe takes the language as optional 3rd argument, to be re-evaluated when the language changes
