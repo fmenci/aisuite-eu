@@ -1,16 +1,17 @@
 import { AISuiteCoreListItemModel, ILinguaFlag, LinSceExportFormula } from '@aisuite-eu/ngtools';
 
-const flag = (name: string, altName: string, file: string): ILinguaFlag => ({
-  name, altName, label: altName, check: true, imageUrl: `assets/flags/${file}.svg`
+const flag = (name: string, altName: string, imageUrl: string): ILinguaFlag => ({
+  name, altName, label: altName, check: true, imageUrl
 });
 
+// full paths, not built at runtime: `npm run publish` finds them in the bundle to inline each flag
 export const DEMO_FLAGS: ILinguaFlag[] = [
   { name: '00', altName: 'All languages', label: 'All', check: false, imageUrl: 'assets/flags/Flag_00.svg' },
-  flag('en', 'English', 'Flag_of_the_United_Kingdom'),
-  flag('fr', 'Français', 'Flag_of_France'),
-  flag('de', 'Deutsch', 'Flag_of_Germany'),
-  flag('it', 'Italiano', 'Flag_of_Italy'),
-  flag('es', 'Español', 'Flag_of_Spain')
+  flag('en', 'English', 'assets/flags/Flag_of_the_United_Kingdom.svg'),
+  flag('fr', 'Français', 'assets/flags/Flag_of_France.svg'),
+  flag('de', 'Deutsch', 'assets/flags/Flag_of_Germany.svg'),
+  flag('it', 'Italiano', 'assets/flags/Flag_of_Italy.svg'),
+  flag('es', 'Español', 'assets/flags/Flag_of_Spain.svg')
 ];
 
 /** Labels of the WDR formula by language, the tags the server does not know are shown as *tag */

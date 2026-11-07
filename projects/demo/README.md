@@ -6,6 +6,19 @@ Angular 22 application showing the components of `@aisuite-eu/ngtools`, found in
 npm start
 ```
 
+## Publish
+`npm run publish` writes the demo for a host page, such as a Razor page, to `dist/demo-publish`. It only builds, nothing is uploaded.
+`npm run build` still produces the usual chunks.
+
+- `demo.js` holds the whole application with no chunks: scripts, flags and third-party licences.
+- `demo.css` holds only `src/styles.less`.
+
+The host page provides Bootstrap 5, Font Awesome and the `<app-root>` element, and loads the two files. The script has to be a module, which also lets it sit anywhere in the page:
+```html
+<link rel="stylesheet" href="demo.css" />
+<script type="module" src="demo.js"></script>
+```
+
 ## Tabs
 One single page, no routing. Each tab is loaded when first opened (`@defer`) and kept afterwards, so a page keeps its state when leaving it.
 Tabs follow the ARIA pattern: arrows, Home and End move between them.

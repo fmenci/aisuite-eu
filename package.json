@@ -24,18 +24,19 @@
     "ng": "ng",
     "start": "ng serve demo",
     "build": "ng build demo",
+    "publish": "ng build demo --configuration production,publish && node projects/demo/build-single-file.mjs",
     "build:lib": "ng build @aisuite-eu/ngtools",
     "test:lib": "ng test @aisuite-eu/ngtools",
     "lint": "ng lint"
   },
   "packageManager": "npm@11.18.0",
   "dependencies": {
-    "@angular/common": "^22.0.0",
-    "@angular/compiler": "^22.0.0",
-    "@angular/core": "^22.0.0",
-    "@angular/forms": "^22.0.0",
-    "@angular/platform-browser": "^22.0.0",
-    "@angular/router": "^22.0.0",
+    "@angular/common": "^22.2.5",
+    "@angular/compiler": "^22.2.5",
+    "@angular/core": "^22.2.5",
+    "@angular/forms": "^22.2.5",
+    "@angular/platform-browser": "^22.2.5",
+    "@angular/router": "^22.2.5",
     "@fortawesome/fontawesome-free": "^7.3.1",
     "bootstrap": "^5.3.8",
     "rxjs": "~7.8.0",
@@ -45,9 +46,10 @@
   "devDependencies": {
     "@angular/build": "^22.2.0",
     "@angular/cli": "^22.0.4",
-    "@angular/compiler-cli": "^22.0.0",
+    "@angular/compiler-cli": "^22.2.5",
     "@eslint/js": "^10.0.1",
     "angular-eslint": "22.5.0",
+    "esbuild": "^0.28.2",
     "eslint": "^10.9.1",
     "jsdom": "^30.1.1",
     "less": "^4.2.0",
@@ -56,5 +58,8 @@
     "typescript": "~6.0.2",
     "typescript-eslint": "8.69.0",
     "vitest": "^5.0.1"
+  },
+  "overrides": {
+    "minimatch": "^11.0.5"
   }
 }

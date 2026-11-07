@@ -111,6 +111,15 @@
               ],
               "outputHashing": "all"
             },
+            "publish": {
+              "outputPath": {
+                "base": "dist/demo-publish",
+                "browser": ""
+              },
+              "styles": [
+                "projects/demo/src/styles.less"
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
